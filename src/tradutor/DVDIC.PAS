@@ -348,6 +348,7 @@ var
     begin
         sl := TStringList.Create;
         s := d.sufixo;
+        listaSufixos.sorted := true;
         while s <> '' do
             begin
                 p := pos (' ', s);
@@ -377,6 +378,8 @@ var
 begin
    procuraDic := false;
    prefixoPalavra := palavra;
+   listaNomes.sorted := true;
+   listaInexist.sorted := true;
 
    if listaNomes.find (palavra, i) then
        begin
@@ -482,4 +485,3 @@ begin
 end;
 
 end.
-
