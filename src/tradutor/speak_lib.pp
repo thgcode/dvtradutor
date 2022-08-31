@@ -118,6 +118,7 @@ interface
   { used for MARK and PLAY events.  UTF8 string }
   { used for phoneme names (UTF8). Terminated by a zero byte unless the name needs the full 8 bytes. }
 
+pespeak_EVENT = ^espeak_EVENT;
     espeak_EVENT = record
         _type : espeak_EVENT_TYPE;
         unique_identifier : dword;
