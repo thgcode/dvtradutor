@@ -10,7 +10,7 @@ interface
 
 uses windows, messages, dvcrt, dvwav, dvsapglb,
      dvserpro, dvsapi4, dvsapi5, dvsapi54,
-     dialogs, comObj, sysUtils, activex;
+     comObj, sysUtils, activex;
 
 function sapiInic (voz, veloc, tom: integer;
                    tipoSapi: integer; nomeArq: string): boolean;

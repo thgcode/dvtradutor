@@ -25,7 +25,7 @@
 
 unit uttsPortug;
 interface
-uses sysUtils, dialogs, classes,
+uses sysUtils, classes,
      uttsInic, uttsExcessoes, uttsPreproc, uttsTonica, uttsProsodia;
 
 function inicTradutor (nomeArqRegras, nomeArqExcessoes: string): boolean;
@@ -571,4 +571,3 @@ begin
 end;
 
 end.
-

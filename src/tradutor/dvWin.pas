@@ -14,7 +14,7 @@ unit dvwin;
 
 interface
 
-uses Windows, SysUtils, messages, shellApi, dialogs,
+uses Windows, SysUtils, messages, shellApi,
      dvcrt, dvwav, dvAmplia,
      dvtradut, dvinter, dvlenum, dvhora, minireg,
 {$IfNDef VIDENTE}
@@ -763,7 +763,7 @@ end;
 function existeArqSom (nomeSom: string): boolean;
 {$IfDef VIDENTE}
 begin
-	existeArqSom := false
+        existeArqSom := false
 end;
 {$Else}
 begin
@@ -862,7 +862,7 @@ end;
 function sintReadKey: char;
 {$IfDef VIDENTE}
 begin
-	sintReadKey := readkey
+        sintReadKey := readkey
 end;
 {$Else}
 var c: char;

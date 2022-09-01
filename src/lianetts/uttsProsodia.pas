@@ -1,7 +1,7 @@
 unit uttsProsodia;
 
 interface
-uses Classes, sysUtils, dialogs;
+uses Classes, sysUtils;
 
 function inicProsodia (arqConfigProsodia: string): boolean;
 function inicListaDifones(arq_difones: string): boolean;

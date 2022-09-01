@@ -11,7 +11,7 @@
 unit dvwav;
 interface
 uses
-    Classes, Windows, SysUtils, dvcrt, mmsystem, dialogs;
+    Classes, Windows, SysUtils, dvcrt, mmsystem;
 
 function  waveGetDeviceName  (devId: Cardinal): string;
 procedure waveGetDeviceNames (var names: TStringList);
@@ -727,4 +727,3 @@ finalization
         end;
 *)
 end.
-
