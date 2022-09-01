@@ -9,7 +9,7 @@ unit dvsapi4;
 interface
 
 uses windows, messages, dvcrt, dvwav, dvsapglb,
-     dialogs, comObj, sysUtils, activex, speech;
+     comObj, sysUtils, activex, speech;
 
 function sapiInic (voz, veloc, tom: integer; nomeArq: string): boolean;
 procedure sapiFim;
@@ -439,4 +439,3 @@ begin
 end;
 
 end.
-
