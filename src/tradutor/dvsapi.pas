@@ -9,7 +9,7 @@ unit dvsapi;
 interface
 
 uses windows, messages, dvcrt, dvwav, dvsapglb,
-     dvserpro, dvsapi4, dvsapi5, dvsapi54,
+     dvserpro, dvsapi4, dvsapi5, dvsapi54, dvEspeak,
      comObj, sysUtils, activex;
 
 function sapiInic (voz, veloc, tom: integer;
@@ -42,6 +42,7 @@ function sapiInic (voz, veloc, tom: integer;
 begin
     modeloSapi := tipoSapi;
     case modeloSapi of
+        2:  result := dvEspeak.sapiInic (voz, veloc, tom, nomeArq);
         3:  result := dvserpro.sapiInic (voz, veloc, tom, nomeArq);
         4:  result := dvsapi4.sapiInic (voz, veloc, tom, nomeArq);
         54: result := dvsapi54.sapiInic (voz, veloc, tom, nomeArq);
@@ -55,6 +56,7 @@ end;
 procedure sapiFim;
 begin
     case modeloSapi of
+        2: dvEspeak.sapiFim;
         3: dvserpro.sapiFim;
         4: dvsapi4.sapiFim;
        54: dvsapi54.sapiFim;
@@ -66,6 +68,7 @@ end;
 procedure sapiFala (s: string);
 begin
     case modeloSapi of
+        2: dvEspeak.sapiFala (s);
         3: dvserpro.sapiFala (s);
         4: dvsapi4.sapiFala (s);
        54: dvsapi54.sapiFala (s);
@@ -77,6 +80,7 @@ end;
 procedure sapiFalaPchar (p: pchar);
 begin
     case modeloSapi of
+        2: dvEspeak.sapiFalaPchar (p);
         3: dvserpro.sapiFalaPchar (p);
         4: dvsapi4.sapiFalaPchar (p);
        54: dvsapi54.sapiFalaPchar (p);
@@ -91,6 +95,7 @@ function sapiAtivo (masc: byte): boolean;
 begin
     processWindowsQueue;
     case modeloSapi of
+        2: result := dvEspeak.sapiAtivo (masc);
         3: result := dvserpro.sapiAtivo (masc);
         4: result := dvsapi4.sapiAtivo (masc);
        54: result := dvsapi54.sapiAtivo (masc);
@@ -102,6 +107,7 @@ end;
 procedure sapiReset;
 begin
     case modeloSapi of
+        2: dvEspeak.sapiReset;
         3: dvserpro.sapiReset;
         4: dvsapi4.sapiReset;
        54: dvsapi54.sapiReset;
@@ -113,6 +119,7 @@ end;
 procedure sapiPegaParam (var param: TParamVoz);
 begin
     case modeloSapi of
+        2: dvEspeak.sapiPegaParam (param);
         3: dvserpro.sapiPegaParam (param);
         4: dvsapi4.sapiPegaParam (param);
        54: dvsapi54.sapiPegaParam (param);
@@ -125,6 +132,7 @@ end;
 procedure sapiMudaParam (param: TParamVoz);
 begin
     case modeloSapi of
+        2: dvEspeak.sapiMudaParam (param);
         3: dvserpro.sapiMudaParam (param);
         4: dvsapi4.sapiMudaParam (param);
        54: dvsapi54.sapiMudaParam (param);
@@ -136,6 +144,7 @@ end;
 procedure sapiInfo (nvoz: integer; var paramSapi: TInfoSAPI);
 begin
     case modeloSapi of
+        2: dvEspeak.sapiInfo (nvoz, paramSapi);
         3: dvserpro.sapiInfo (nvoz, paramSapi);
         4: dvsapi4.sapiInfo (nvoz, paramSapi);
        54: dvsapi54.sapiInfo (nvoz, paramSapi);
@@ -148,6 +157,7 @@ end;
 function sapiNumVozes: integer;
 begin
     case modeloSapi of
+        2: result := dvEspeak.sapiNumVozes;
         3: result := dvserpro.sapiNumVozes;
         4: result := dvsapi4.sapiNumVozes;
        54: result := dvsapi54.sapiNumVozes;
