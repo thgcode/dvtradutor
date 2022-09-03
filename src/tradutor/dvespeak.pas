@@ -6,7 +6,7 @@ unit dvEspeak;
 
 interface
 
-uses dvCrt, dvWav, dvSapGlb, speak_lib;
+uses dvCrt, dvWav, dvSapGlb, speak_lib, sysutils;
 
 function sapiInic (voz, veloc, tom: integer; nomeArq: string): boolean;
 procedure sapiFim;
@@ -24,7 +24,8 @@ function sapiNumVozes: integer;
 implementation
 var sampleRate: integer;
 
-function espeakCallback(wav: pByte; numsamples: longInt; events: pespeak_EVENT): longInt; cdecl;
+function espeakCallback(wav: pByte; numsamples: integer; events: pespeak_EVENT):
+integer; cdecl;
     begin
     espeakCallback := 0; // Continua sinteze
 
@@ -58,6 +59,16 @@ end;
 
 procedure sapiFala (s: string);
 begin
+    if (length(s) = 1) and not (s[1] in ['a'..'z'] + ['A'..'Z']) then
+        begin
+        espeak_Key(@s[1]);
+        exit;
+    end;
+
+    s := trim(s);
+
+    if s ='' then exit;
+
     espeak_Synth(@s[1], length(s), 0, POS_CHARACTER, 0, 0, nil, nil);
 end;
 
