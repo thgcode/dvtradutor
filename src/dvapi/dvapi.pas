@@ -1,5 +1,5 @@
 program webserver;
-
+{$apptype gui}
 uses
   fphttpapp, httpdefs, httproute, wrapDvwin, dvWin;
 
