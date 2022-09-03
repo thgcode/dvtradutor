@@ -4,6 +4,16 @@ procedure registra;
 implementation
 uses httpDefs, httpRoute, fpJson, jsonParser, dvWin;
 
+procedure bipaEndpoint(req: TRequest; resp: TResponse);
+    begin
+        sintBip;
+end;
+
+procedure clekaEndpoint(req: TRequest; resp: TResponse);
+    begin
+        sintClek;
+end;
+
 procedure sintetizaEndpoint(req: TRequest; resp: TResponse);
     var o: tJsonObject;
     begin
@@ -43,6 +53,8 @@ end;
 
 procedure registra;
     begin
+    HTTPRouter.RegisterRoute('/bip', rmPost, @bipaEndpoint);
+    HTTPRouter.RegisterRoute('/clek', rmPost, @clekaEndpoint);
     HTTPRouter.RegisterRoute('/fala', rmPost, @sintetizaEndpoint);
     HTTPRouter.RegisterRoute('/linha', rmGet, @leLinhaEndpoint);
 end;
