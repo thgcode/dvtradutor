@@ -611,7 +611,7 @@ type
     function GetDataPtr: Pointer;
     procedure SetDataPtr(const Value: Pointer);
   protected
-    function QueryInterface(const IID: TGUID; out Obj): HResult; virtual; stdcall;
+    function QueryInterface(constref IID: TGUID; out Obj): HResult; virtual; stdcall;
     function _AddRef: Integer; virtual; stdcall;
     function _Release: Integer; virtual; stdcall;
 
@@ -3309,7 +3309,7 @@ begin
   ParseString(PSOChar(path), true, False, self, [foCreatePath, foPutValue], TSuperObject.Create(Value));
 end;
 
-function TSuperObject.QueryInterface(const IID: TGUID; out Obj): HResult; stdcall;
+function TSuperObject.QueryInterface(constref IID: TGUID; out Obj): HResult; stdcall;
 begin
   if GetInterface(IID, Obj) then
     Result := 0
@@ -6571,4 +6571,3 @@ finalization
   Assert(debugcount = 0, 'Memory leak');
 {$ENDIF}
 end.
-
