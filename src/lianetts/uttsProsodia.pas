@@ -136,7 +136,7 @@ begin
                end;
         end;
 
-    lista_difones.sort;
+    lista_difones.sorted := true;
     inicListaDifones := true;
 end;
 
