@@ -1,51 +1,47 @@
+{ Reescrita da unit dvjpeg para funcionar com Free Pascal }
+{ Autor: Thiago Seus
+{ Em 13/03/2026 }
+
 unit dvjpeg;
 
 interface
 uses
-  dvcrt,
-  classes,
-//  jpeg,
-//  graphics,
-  sysUtils;
+  Classes, SysUtils, FPImage, FPReadJPEG, FPWriteBMP;
 
-procedure CopyJpegToBmp (FJpegFile, FBmpFile: string);
+procedure CopyJpegToBmp(const FJpegFile, FBmpFile: string);
 
 implementation
 
-procedure CopyJpegToBmp (FJpegFile, FBmpFile: string);
-{
+procedure CopyJpegToBmp(const FJpegFile, FBmpFile: string);
 var
-    FStreamBmp, FStreamJpg  : TStream;
-    FJpeg    : TJpegImage;
-    FBmp     : TBitmap;
-}
+  Reader: TFPReaderJPEG;
+  Writer: TFPWriterBMP;
+  Img: TFPMemoryImage;
+  FSIn, FSOut: TFileStream;
 begin
-{
-  if FileExists(FBmpFile) then DeleteFile(FBmpFile);
-  FStreamBmp := TFileStream.Create(FBmpFile,fmCreate);
-  FStreamJpg := TFileStream.Create(FJpegFile, fmOpenRead);
-  FJpeg := TJPEGImage.Create;
-  FBmp := TBitmap.Create;
+  // Ensure output file does not exist
+  if FileExists(FBmpFile) then
+    DeleteFile(FBmpFile);
+
+  FSIn := TFileStream.Create(FJpegFile, fmOpenRead or fmShareDenyWrite);
+  FSOut := TFileStream.Create(FBmpFile, fmCreate);
+  Reader := TFPReaderJPEG.Create;
+  Writer := TFPWriterBMP.Create;
+  Img := TFPMemoryImage.Create(0, 0);
 
   try
-    FJpeg.LoadFromStream(FStreamJpg);
+    // Load JPEG into memory image
+    Img.LoadFromStream(FSIn, Reader);
 
-    if FJpeg.PixelFormat = jf24bit then
-      FBmp.PixelFormat := pf24bit
-    else
-      FBmp.PixelFormat := pf8bit;
-
-    FBmp.Width := FJpeg.Width;
-    FBmp.Height := FJpeg.Height;
-    FBmp.Canvas.Draw(0,0,FJpeg);
-    FBmp.SaveToStream(FStreamBmp);
+    // Save as BMP
+    Img.SaveToStream(FSOut, Writer);
   finally
-    FStreamJpg.Free;
-    FStreamBmp.Free;
-    FJpeg.Free;
-    FBmp.Free;
+    Img.Free;
+    Reader.Free;
+    Writer.Free;
+    FSIn.Free;
+    FSOut.Free;
   end;
-}
 end;
 
 end.
